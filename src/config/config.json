@@ -1,0 +1,18 @@
+{
+    "common": {
+        "port": 5000,
+        "log": {
+            "level": "info"
+        }
+    },
+    "aws": {
+        "cognito": {
+            "region": "",
+            "userPool": "",
+            "clientId": "",
+            "cognitoAdminAccessKey": "",
+            "cognitoAdminSecretAccessKey": ""
+        },
+        "cliVersion": ""
+    }
+}

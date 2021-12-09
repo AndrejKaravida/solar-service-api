@@ -1,5 +1,6 @@
-import config from '../config/config.json';
+import config from '../config';
 import AWS from 'aws-sdk';
+// @ts-ignore
 import { verifierFactory } from '@southlane/cognito-jwt-verifier';
 
 AWS.config.update({
@@ -9,7 +10,6 @@ AWS.config.update({
 });
 
 export const CognitoClient = new AWS.CognitoIdentityServiceProvider({
-    apiVersion: config.aws.cliVersion,
     region: config.aws.cognito.region,
 });
 

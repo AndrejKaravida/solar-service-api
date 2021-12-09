@@ -1,5 +1,4 @@
 import express, { json } from 'express';
-import 'express-async-errors';
 import cors from 'cors';
 import { healthCheckRoute } from './routes/healthCheck';
 import { protectedSolarRoute, publicSolarRoute } from './routes/solarRoute';

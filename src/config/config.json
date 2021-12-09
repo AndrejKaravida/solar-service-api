@@ -1,18 +1,18 @@
 {
-    "common": {
-        "port": 5000,
-        "log": {
-            "level": "info"
-        }
-    },
-    "aws": {
-        "cognito": {
-            "region": "",
-            "userPool": "",
-            "clientId": "",
-            "cognitoAdminAccessKey": "",
-            "cognitoAdminSecretAccessKey": ""
-        },
-        "cliVersion": ""
+  "common": {
+    "port": 5000,
+    "log": {
+      "level": "info"
     }
+  },
+  "aws": {
+    "cognito": {
+      "region": "eu-east-1",
+      "userPool": "",
+      "clientId": "",
+      "cognitoAdminAccessKey": "",
+      "cognitoAdminSecretAccessKey": ""
+    },
+    "cliVersion": "2015-03-01"
+  }
 }

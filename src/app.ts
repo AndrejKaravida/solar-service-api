@@ -1,7 +1,7 @@
-import express, { json } from 'express';
+import express, {json} from 'express';
 import cors from 'cors';
-import { healthCheckRoute } from './routes/healthCheck';
-import { protectedSolarRoute, publicSolarRoute } from './routes/solarRoute';
+import {healthCheckRoute} from './routes/healthCheck';
+import solarRoutes from './routes/solarRoute';
 
 const app = express();
 app.use(json());
@@ -13,8 +13,7 @@ app.use(
     })
 );
 
-app.use('/api/health-check', healthCheckRoute);
-app.use('/api/solar', publicSolarRoute);
-app.use('/api/solar', protectedSolarRoute);
+app.use('/api/v1/health-check', healthCheckRoute);
+app.use('/api/v1/solar', solarRoutes);
 
-export { app };
+export {app};

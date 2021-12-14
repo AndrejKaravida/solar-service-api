@@ -1,14 +1,11 @@
-import { Router, Request, Response } from 'express';
-import { verifyAccess } from '../middlewares/verifyAccess';
+import express from 'express';
+import {verifyAccess} from '../middlewares/verifyAccess';
+import {get} from "../controllers/solar";
 
-export const publicSolarRoute = Router().get('/', (req: Request, res: Response) => {
-    res.send({});
-});
+const router = express.Router();
 
-export const protectedSolarRoute = Router().get(
-    '/protected',
-    verifyAccess,
-    (req: Request, res: Response) => {
-        res.send({});
-    }
-);
+router.get('/', get)
+
+router.get('/protected', verifyAccess, get);
+
+export default router;

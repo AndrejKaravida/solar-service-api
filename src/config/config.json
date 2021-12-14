@@ -5,6 +5,17 @@
       "level": "info"
     }
   },
+  "env": {
+    "name": "development"
+  },
+  "db": {
+    "username": "",
+    "password": "",
+    "clusterName": "energyweathercluster",
+    "dbName": "Database1",
+    "collectionName": "solarpanels"
+
+  },
   "aws": {
     "cognito": {
       "region": "eu-east-1",

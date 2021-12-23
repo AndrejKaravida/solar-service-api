@@ -1,9 +1,11 @@
 import { Router, Request, Response } from "express";
+import { verifyAccess } from "../middlewares/verifyAccess";
 import { getDb } from "../repo/mongodb/mongo";
 import { calculateLoad } from "../services/calculations";
 
 export const currentSolarRoute = Router().get(
   "/:city",
+  verifyAccess,
   async (req: Request, res: Response) => {
     const city = req.params.city;
     const mongoClient = getDb();

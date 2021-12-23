@@ -4,6 +4,12 @@ import env from 'dotenv';
 env.config();
 
 const buildConfig = () => {
+    loadAwsConfig();
+    loadDbConfig();
+    return config;
+}
+
+const loadAwsConfig = () => {
     if (!process.env["USER-POOL"]) {
         throw new Error('USER_POOL is not defined')
     }
@@ -27,8 +33,20 @@ const buildConfig = () => {
     }
 
     config.aws.cognito.cognitoAdminSecretAccessKey = process.env["ADMIN-SECRET-ACCESS-KEY"];
+}
 
-    return config;
+const loadDbConfig = () => {
+    if (!process.env["DB-USERNAME"]) {
+        throw new Error('DB_USERNAME is not defined')
+    }
+
+    config.db.username = process.env["DB-USERNAME"];
+
+    if (!process.env["DB-PASSWORD"]) {
+        throw new Error('DB_PASSWORD is not defined')
+    }
+
+    config.db.password = process.env["DB-PASSWORD"];
 }
 
 export default buildConfig();

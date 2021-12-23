@@ -6,6 +6,8 @@ import { currentSolarRoute, historySolarRoute } from "./routes/solarRoute";
 const app = express();
 app.use(json());
 
+app.use(express.urlencoded({ extended: true }));
+
 app.use(
   cors({
     origin: "http://localhost:3000",

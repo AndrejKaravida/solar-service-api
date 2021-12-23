@@ -7,8 +7,9 @@ export const verifyAccess = async (req: Request, res: Response, next: NextFuncti
         const token = req.headers.authorization;
         const decodedToken = await verifier.verify(token);
         if(!decodedToken) {
-            return new UnauthorizedError('Not valid token provided.');
+            throw new UnauthorizedError('Not valid token provided.');
         }
+
     } catch (e) {
         throw new UnauthorizedError('Not valid token provided.');
     }

@@ -31,6 +31,7 @@ export const currentSolarRoute = Router().get(
 
 export const historySolarRoute = Router().get(
   "/:city",
+  verifyAccess,
   async (req: Request, res: Response) => {
     const mongoClient = getDb();
     const city = req.params.city;

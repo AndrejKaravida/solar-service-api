@@ -1,26 +1,24 @@
 import { Router, Request, Response } from "express";
-import { validateRequest } from "../middlewares/validateRequest";
-import { verifyAccess } from "../middlewares/verifyAccess";
-import { ILoadMeasurement } from "../models/LoadMeasurement";
-import { IMeasurementHistory } from "../models/MeasurementHistory";
-import { getDb } from "../repo/mongodb/mongo";
-import { calculateLoad } from "../services/calculations";
-import { average } from "../utils/average";
 import { check } from "express-validator";
-import { ICity } from "../models/City";
-import { IProduction } from "../models/Production";
+import { validateRequest } from "../../middlewares/validateRequest";
+import { verifyAccess } from "../../middlewares/verifyAccess";
+import { ICity } from "../../models/City";
+import { ILoadMeasurement } from "../../models/LoadMeasurement";
+import { IMeasurementHistory } from "../../models/MeasurementHistory";
+import { getDb } from "../../repo/mongodb/mongo";
+import { calculateLoad } from "../../services/calculations";
+import { average } from "../../utils/average";
+import { ExtendedRequest, Params, Query } from "../types";
 
-import { Params, Query, ExtendedRequest } from "./types";
 interface RequestBody {}
 interface RequestQuery extends Query {}
 interface RequestParams extends Params {
   city: string;
 }
 
-export const currentSolarRoute = Router().get(
+export const getHistoryData = Router().get(
   "/:city",
   [check("city").isLength({ min: 2 }).withMessage("City must be defined")],
-  verifyAccess,
   validateRequest,
   async (
     req: ExtendedRequest<RequestBody, RequestQuery, RequestParams>,
@@ -28,37 +26,7 @@ export const currentSolarRoute = Router().get(
   ) => {
     const mongoClient = getDb();
     const city: ICity = req.params;
-    const currentTime = new Date();
-    currentTime.setMinutes(0, 0, 0);
-    const measurement = await mongoClient.findOne({
-      city: city.city,
-      date: currentTime,
-    });
-    if (measurement) {
-      const production: IProduction = {
-        production: calculateLoad(
-          measurement.cloud_coverage,
-          measurement.temperature
-        ),
-      };
-
-      return res.send(production);
-    }
-    return res.send({});
-  }
-);
-
-export const historySolarRoute = Router().get(
-  "/:city",
-  [check("city").isLength({ min: 2 }).withMessage("City must be defined")],
-  verifyAccess,
-  async (
-    req: ExtendedRequest<RequestBody, RequestQuery, RequestParams>,
-    res: Response
-  ) => {
-    const mongoClient = getDb();
-    const city: ICity = req.params;
-    const results = await mongoClient.find({ city }).toArray();
+    const results = await mongoClient.find({ city: city.city }).toArray();
     const measurements: ILoadMeasurement[] = [];
     const measurementHistory: IMeasurementHistory[] = [];
     const days: Date[] = [];

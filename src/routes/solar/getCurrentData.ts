@@ -1,18 +1,13 @@
-import { Router, Request, Response } from "express";
+import { Router, Response } from "express";
 import { check } from "express-validator";
+import { getCurrent } from "../../controllers/solar";
 import { validateRequest } from "../../middlewares/validateRequest";
-import { verifyAccess } from "../../middlewares/verifyAccess";
-import { ICity } from "../../models/City";
-import { IProduction } from "../../models/Production";
-import { getDb } from "../../repo/mongodb/mongo";
-import { calculateLoad } from "../../services/calculations";
-import { Params, Query, ExtendedRequest } from "../types";
-
-interface RequestBody {}
-interface RequestQuery extends Query {}
-interface RequestParams extends Params {
-  city: string;
-}
+import {
+  ExtendedRequest,
+  RequestBody,
+  RequestParams,
+  RequestQuery,
+} from "../types";
 
 export const getCurrentData = Router().get(
   "/:city",
@@ -22,24 +17,6 @@ export const getCurrentData = Router().get(
     req: ExtendedRequest<RequestBody, RequestQuery, RequestParams>,
     res: Response
   ) => {
-    const mongoClient = getDb();
-    const city: ICity = req.params;
-    const currentTime = new Date();
-    currentTime.setMinutes(0, 0, 0);
-    const measurement = await mongoClient.findOne({
-      city: city.city,
-      date: currentTime,
-    });
-    if (measurement) {
-      const production: IProduction = {
-        production: calculateLoad(
-          measurement.cloud_coverage,
-          measurement.temperature
-        ),
-      };
-
-      return res.send(production);
-    }
-    return res.send({});
+    await getCurrent(req, res);
   }
 );

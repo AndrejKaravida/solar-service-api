@@ -5,5 +5,5 @@ import solarRouter from "./routes/solar";
 
 export const routes = Router();
 
-routes.use("/solar", verifyAccess, solarRouter);
+routes.use("/solar", solarRouter);
 routes.use("/health-check", healthCheckRoute);

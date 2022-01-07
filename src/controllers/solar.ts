@@ -11,7 +11,7 @@ import { Response } from "express";
 import { ILoadMeasurement } from "../models/LoadMeasurement";
 import { IMeasurementHistory } from "../models/MeasurementHistory";
 import { average } from "../utils/average";
-import { getCurrentMeasurement, findAllMeasurements } from "../services/solar";
+import { getCurrentMeasurement, getAllMeasurements } from "../services/solar";
 
 export const getCurrent = async (
   req: ExtendedRequest<RequestBody, RequestQuery, RequestParams>,
@@ -37,7 +37,7 @@ export const getHistory = async (
   res: Response
 ) => {
   const city: ICity = req.params;
-  const results = await findAllMeasurements(city.city);
+  const results = await getAllMeasurements(city.city);
   const measurements: ILoadMeasurement[] = [];
   const measurementHistory: IMeasurementHistory[] = [];
   const days: Date[] = [];

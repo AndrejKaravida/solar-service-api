@@ -1,8 +1,8 @@
 import { Router } from "express";
 import { healthCheckRoute } from "./routes/healthCheck";
-import solarRouter from "./routes/solar";
+import { investmentRouter } from "./routes/investment.route";
 
 export const routes = Router();
 
-routes.use("/solar", solarRouter);
+routes.use("/investment", investmentRouter);
 routes.use("/health-check", healthCheckRoute);

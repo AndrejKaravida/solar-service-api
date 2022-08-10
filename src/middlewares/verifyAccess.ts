@@ -1,5 +1,5 @@
 import { verifier } from "../services/aws";
-import { Request, Response, NextFunction } from "express";
+import { NextFunction, Request, Response } from "express";
 
 export const verifyAccess = async (
   req: Request,
@@ -12,6 +12,9 @@ export const verifyAccess = async (
     if (!decodedToken) {
       return res.status(401).send("Not valid token provided.");
     }
+    req.user = {
+      _id: decodedToken.sub,
+    };
   } catch (e) {
     return res.status(401).send("Not valid token provided.");
   }

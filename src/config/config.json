@@ -13,8 +13,7 @@
     "password": "",
     "clusterName": "energyweathercluster",
     "dbName": "Database1",
-    "collectionName": "solarpanels"
-
+    "investmentCollectionName": "investments"
   },
   "aws": {
     "cognito": {

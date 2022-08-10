@@ -1,15 +1,14 @@
-import {app} from './app';
-import config from './config';
-import {createConnection} from "./repo/mongodb/mongo";
+import { app } from "./app";
+import config from "./config";
+import { connectToDatabase } from "./services/database.service";
 
 const start = async () => {
+  await connectToDatabase();
+  console.log("Successfully connected to the database!");
 
-    createConnection();
-    console.log('Successfully connected to the database!')
-
-    app.listen(config.common.port, () => {
-        console.log(`API running on port ${config.common.port}`);
-    });
+  app.listen(config.common.port, () => {
+    console.log(`API running on port ${config.common.port}`);
+  });
 };
 
 start();

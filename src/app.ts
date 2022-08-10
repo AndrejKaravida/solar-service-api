@@ -2,6 +2,18 @@ import express, { json } from "express";
 import cors from "cors";
 import errorHandler from "./middlewares/errorHandler";
 import { routes } from "./routes";
+import { verifyAccess } from "./middlewares/verifyAccess";
+
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace Express {
+    interface Request {
+      user: {
+        _id: string;
+      };
+    }
+  }
+}
 
 const app = express();
 app.use(json());
@@ -15,7 +27,7 @@ app.use(
   })
 );
 
-app.use("/api", routes);
+app.use("/api", [verifyAccess], routes);
 
 app.use(errorHandler);
 

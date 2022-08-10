@@ -5,7 +5,7 @@ export const calculateLoad = (
   temperature: number,
   considerP = 100
 ) => {
-  if (cloudCoverage > 34) {
+  if (cloudCoverage > 33) {
     return threshold;
   }
   let solarInsolation = 990 * (1 - 3 * (cloudCoverage / 100));

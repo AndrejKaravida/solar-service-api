@@ -17,7 +17,6 @@ export const getUserInvestments = async (req: Request) => {
   }
 
   const userId = req.user._id;
-  console.log(userId);
 
   return (await collections.investments
     .find({ userId })

@@ -1,10 +1,9 @@
-import { NextFunction, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { validationResult } from "express-validator";
 import { BadRequestError } from "../errors/badRequestError";
-import { ExtendedRequest } from "../routes/types";
 
 export const validateRequest = (
-  req: ExtendedRequest,
+  req: Request,
   res: Response,
   next: NextFunction
 ) => {

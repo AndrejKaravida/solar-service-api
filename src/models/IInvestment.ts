@@ -1,18 +1,14 @@
-import { IEnvironmentalImpact } from "./IEnvironmentalImpact";
-import { IProductionHistory } from "./IProductionHistory";
 import { ObjectId } from "mongodb";
+import { ISolarPanel } from "./ISolarPanel";
+import { IEnvironmentalImpact } from "./IEnvironmentalImpact";
 
 export interface IInvestment {
   id?: ObjectId;
   userId: string;
-  address: string;
-  price: number;
+  city: string;
   date: Date;
-  moneySaved: number;
-  kwhGenerated: number;
-  currentProduction: number;
-  productionHistory: IProductionHistory[];
   roofSize: number;
-  monthlyBillPrice: number;
+  solarPanel: ISolarPanel;
   environmentalImpact: IEnvironmentalImpact;
+  monthlyBillPrice: number;
 }

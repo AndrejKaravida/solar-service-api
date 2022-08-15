@@ -13,15 +13,15 @@
     "password": "",
     "clusterName": "energyweathercluster",
     "dbName": "Database1",
-    "investmentCollectionName": "investments"
+    "investmentCollectionName": "investments",
+    "productionCollectionName": "production",
+    "solarPanelsCollectionName": "solarPanels"
   },
   "aws": {
     "cognito": {
       "region": "us-east-1",
       "userPool": "",
-      "clientId": "",
-      "cognitoAdminAccessKey": "",
-      "cognitoAdminSecretAccessKey": ""
+      "clientId": ""
     },
     "cliVersion": "2015-03-01"
   }

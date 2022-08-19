@@ -8,7 +8,7 @@ export const calculateLoad = (
   if (cloudCoverage > 33) {
     return threshold;
   }
-  let solarInsolation = 990 * (1 - 3 * (cloudCoverage / 100));
-  const tCell = temperature + 0.025 * solarInsolation;
-  return considerP * solarInsolation * 0.00095 * (1 - 0.005 * (tCell - 25));
+  const solarInsulation = 990 * (1 - 3 * (cloudCoverage / 100));
+  const tCell = temperature + 0.025 * solarInsulation;
+  return considerP * solarInsulation * 0.00095 * (1 - 0.005 * (tCell - 25));
 };

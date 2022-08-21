@@ -19,7 +19,7 @@ export const getUserInvestments = async (req: Request) => {
   const userId = req.user._id;
 
   return (await collections.investments
-    .find({ userId })
+    .find({ "user.userId": userId })
     .toArray()) as unknown as IInvestment[];
 };
 
@@ -28,11 +28,7 @@ export const makeInvestment = async (req: Request) => {
     return;
   }
 
-  const userId = req.user._id;
-
   const newInvestment = req.body as IInvestment;
-
-  newInvestment.userId = userId;
 
   return await collections.investments.insertOne(newInvestment);
 };

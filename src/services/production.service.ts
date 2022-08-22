@@ -12,6 +12,8 @@ export const getMostRecent = async (req: Request) => {
   const currentTime = new Date();
   currentTime.setMinutes(0, 0, 0);
 
+  // @ts-ignore
+
   return (await collections.production.findOne({
     investmentId: investmentId,
     date: currentTime,

@@ -1,4 +1,4 @@
-import { verifier } from "../services/aws";
+import { verifier } from "../utils/aws";
 import { NextFunction, Request, Response } from "express";
 
 export const verifyAccess = async (

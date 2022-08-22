@@ -1,6 +1,5 @@
 import express, { json } from "express";
 import cors from "cors";
-import errorHandler from "./middlewares/errorHandler";
 import { routes } from "./routes";
 
 declare global {
@@ -27,7 +26,5 @@ app.use(
 );
 
 app.use("/api", routes);
-
-app.use(errorHandler);
 
 export { app };

@@ -1,6 +1,5 @@
-import express, { Request, Response, Router } from "express";
-import { check } from "express-validator";
-import { validateRequest } from "../middlewares/validateRequest";
+import express, { Request, Response } from "express";
+import { getMostRecent } from "../services/production.service";
 
 // Global Config
 
@@ -10,11 +9,14 @@ productionRouter.use(express.json());
 
 // GET CURRENT PRODUCTION
 
-export const getCurrentData = Router().get(
-  "/:city",
-  [check("city").isLength({ min: 2 }).withMessage("City must be defined")],
-  validateRequest,
+productionRouter.get(
+  "/current/:investmentId",
   async (req: Request, res: Response) => {
-    // await getCurrent(req, res);
+    try {
+      const production = await getMostRecent(req);
+      res.status(200).send(production);
+    } catch (error: any) {
+      res.status(500).send(error.message);
+    }
   }
 );

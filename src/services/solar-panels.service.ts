@@ -1,5 +1,5 @@
 import { Request } from "express";
-import { collections } from "./database.service";
+import { collections } from "../utils/database";
 import { ISolarPanel } from "../models/ISolarPanel";
 
 export const getSolarPanels = async () => {

@@ -1,6 +1,6 @@
 import { app } from "./app";
 import config from "./config";
-import { connectToDatabase } from "./services/database.service";
+import { connectToDatabase } from "./utils/database";
 
 const start = async () => {
   await connectToDatabase();

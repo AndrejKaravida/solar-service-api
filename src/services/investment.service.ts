@@ -1,5 +1,5 @@
 import { IInvestment } from "../models/IInvestment";
-import { collections } from "./database.service";
+import { collections } from "../utils/database";
 import { Request } from "express";
 
 export const getInvestments = async () => {

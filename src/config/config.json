@@ -15,6 +15,7 @@
     "dbName": "Database1",
     "investmentCollectionName": "investments",
     "productionCollectionName": "production",
+    "historyCollectionName": "history",
     "solarPanelsCollectionName": "solarPanels"
   },
   "aws": {

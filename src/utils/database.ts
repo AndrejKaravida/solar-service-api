@@ -6,6 +6,7 @@ import config from "../config";
 export const collections: {
   investments?: Collection;
   production?: Collection;
+  history?: Collection;
   solarPanels?: Collection;
 } = {};
 
@@ -18,6 +19,7 @@ export const connectToDatabase = async () => {
   const database = config.db.dbName;
   const investmentCollectionName = config.db.investmentCollectionName;
   const productionCollectionName = config.db.productionCollectionName;
+  const historyCollectionName = config.db.historyCollectionName;
   const solarPanelsCollectionName = config.db.solarPanelsCollectionName;
 
   const uri = `mongodb+srv://${username}:${password}@${cluster}.lkam4.mongodb.net/${database}?retryWrites=true&w=majority`;
@@ -30,5 +32,6 @@ export const connectToDatabase = async () => {
 
   collections.investments = db.collection(investmentCollectionName);
   collections.production = db.collection(productionCollectionName);
+  collections.history = db.collection(historyCollectionName);
   collections.solarPanels = db.collection(solarPanelsCollectionName);
 };

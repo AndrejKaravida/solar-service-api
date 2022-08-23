@@ -1,4 +1,4 @@
-export interface IProductionHistory {
+export interface IHistory {
   investmentId: string;
   date: Date;
   min: number;

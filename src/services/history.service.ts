@@ -1,20 +1,26 @@
 import { collections } from "../utils/database";
 import { Request } from "express";
-import { IProduction } from "../models/IProduction";
+import { IHistory } from "../models/IHistory";
 
 export const getHistory = async (req: Request) => {
-  if (!collections.production) {
+  if (!collections.history) {
     return;
   }
 
-  let { startDate, endDate } = req.params;
+  const { investmentId, startDate, endDate } = req.body;
 
-  const startingDate = new Date(startDate).setMinutes(0, 0, 0);
-  const endingDate = new Date(endDate).setMinutes(0, 0, 0);
+  let startingDate = new Date(startDate);
+  startingDate.setUTCHours(0, 0, 0, 0);
+  startingDate.setDate(startingDate.getDate() + 1);
 
-  // @ts-ignore
+  const endingDate = new Date(endDate);
+  endingDate.setUTCHours(0, 0, 0, 0);
+  endingDate.setDate(endingDate.getDate() + 1);
 
-  return (await collections.history.findOne({
-    date: startingDate,
-  })) as unknown as IProduction;
+  return (await collections.history
+    .find({
+      investmentId: investmentId,
+      date: { $gte: startingDate, $lte: endingDate },
+    })
+    .toArray()) as unknown as IHistory[];
 };

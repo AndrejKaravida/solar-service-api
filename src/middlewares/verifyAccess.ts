@@ -14,6 +14,7 @@ export const verifyAccess = async (
     }
     req.user = {
       _id: decodedToken.sub,
+      role: decodedToken["custom:role"],
     };
   } catch (e) {
     return res.status(401).send("Not valid token provided.");

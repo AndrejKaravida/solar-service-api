@@ -9,14 +9,11 @@ historyRouter.use(express.json());
 
 // GET HISTORY
 
-historyRouter.get(
-  "/:investmentId/:startDate/:endDate",
-  async (req: Request, res: Response) => {
-    try {
-      const history = await getHistory(req);
-      res.status(200).send(history);
-    } catch (error: any) {
-      res.status(500).send(error.message);
-    }
+historyRouter.post("", async (req: Request, res: Response) => {
+  try {
+    const history = await getHistory(req);
+    res.status(200).send(history);
+  } catch (error: any) {
+    res.status(500).send(error.message);
   }
-);
+});
